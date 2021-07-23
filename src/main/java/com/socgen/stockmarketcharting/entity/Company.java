@@ -53,7 +53,7 @@ public class Company {
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JsonIgnore
 	private Sector sector;
-	@OneToMany(targetEntity = CompanyStockExchangeMap.class)
+	@OneToMany(targetEntity = CompanyStockExchangeMap.class, cascade=CascadeType.REMOVE)
 	@JsonIgnore
 	private List<CompanyStockExchangeMap> compStockmap = new ArrayList<>();
 	protected Company() {

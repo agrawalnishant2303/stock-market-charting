@@ -1,5 +1,6 @@
 package com.socgen.stockmarketcharting.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -25,7 +26,7 @@ public class CompanyStockExchangeMap {
 	@GeneratedValue
 	private Long id;
 	private String companyCode;
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private Company company;
 	@ManyToOne(fetch=FetchType.LAZY)

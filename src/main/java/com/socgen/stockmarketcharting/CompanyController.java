@@ -223,7 +223,7 @@ public class CompanyController {
 	  @DeleteMapping("/company/{id}")
 	  public ResponseEntity<HttpStatus> deleteTutorial(@PathVariable("id") long id) {
 	    try {
-	      compRepo.deleteById(id);
+	    	compRepo.deleteById(id);
 	      return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	    } catch (Exception e) {
 	      return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -238,6 +238,12 @@ public class CompanyController {
 		  List<IpoDetail> upcomingipolist = (List<IpoDetail>) query.getResultList();
 		   // make sure your entity class properties of user are in lower case and match the json,to avoid errors
 		    return upcomingipolist;
+		}
+	  @RequestMapping(value = "/getallsector",method=RequestMethod.GET )
+		public List<Sector> getSectorDetails() throws ClassNotFoundException, IOException {
+			List<Sector> sectorAll= sectorRepo.findAll();
+		   // make sure your entity class properties of user are in lower case and match the json,to avoid errors
+		    return sectorAll;
 		}
 
 }

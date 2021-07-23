@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -34,7 +35,7 @@ public class StockPrice {
 	private LocalDate datee;
 	private LocalTime timee;
 	private LocalDateTime localdatetime;
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.REMOVE)
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private Company company;
 	public StockPrice(String companycode, String exchangename, float shareprice, LocalDate datee, LocalTime timee,

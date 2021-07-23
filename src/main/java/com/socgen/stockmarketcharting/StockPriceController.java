@@ -115,7 +115,7 @@ public class StockPriceController {
 		Query query2 = em.createNamedQuery("CompanyStockExchange.findBycompanyCode");
 		query2.setParameter("stockexchange",e);
 		query2.setParameter("company",c2);
-		String cCode2 = (String) query1.getSingleResult();
+		String cCode2 = (String) query2.getSingleResult();
 		List<StockPrice> period1 = getDataFromDB(cCode1,text.get("name"),LocalDate.parse(text.get("from1")),LocalDate.parse(text.get("to1")));
 		List<StockPrice> period2 = getDataFromDB(cCode2,text.get("name"),LocalDate.parse(text.get("from1")),LocalDate.parse(text.get("to1")));
 		Map<String,List<StockPrice>> map =new HashMap<>();
