@@ -21,13 +21,20 @@ export default class AddCompany extends Component {
             briefWriteup: "",
             sectorName: "",
             submitted: false,
-            companylist: []
+            companylist: [],
+            sectors:[],
+            selectedSector:"",
+            validationError:""
         };
     }
     componentDidMount() {
         IPOService.getAllCompany().then((response => {
             this.setState({ companylist: response.data })
         }));
+        IPOService.getAllSector().then((response => {
+            this.setState({ sectors: response.data })
+        }));
+    
     }
 
 
@@ -60,6 +67,13 @@ export default class AddCompany extends Component {
     onChangesectorName(e) {
         this.setState({
             sectorName: e.target.value
+        });
+    }
+    onChangeSectorDropdown(e){
+        this.setState({
+            selectedSector:e.target.value,
+            sectorName:e.target.value,
+            validationError:e.target.value === ""?"You must select a sector":""
         });
     }
 
@@ -179,7 +193,7 @@ export default class AddCompany extends Component {
                                     name="briefWriteup"
                                 />
                             </div>
-                            <div className="form-group">
+                            {/* <div className="form-group">
                                 <label htmlFor="title">Sector Name</label>
                                 <input
                                     type="text"
@@ -190,7 +204,23 @@ export default class AddCompany extends Component {
                                     onChange={this.onChangesectorName}
                                     name="sectorName"
                                 />
+                            </div> */}
+                            <div>
+                                Select Sector
+                                <select
+                                value={this.state.selectedSector}
+                                onClick={this.onChangeSectorDropdown.bind(this)}>
+                                    {this.state.sectors.map((sector)=>
+                                    <option key={sector.id}
+                                    value={sector.sectorName}>{sector.sectorName}</option>
+                                    )}
+
+                                </select>
                             </div>
+                            <div style={{color:'red',marginTop:'5px'}}>
+                                {this.state.validationError}
+                                </div>
+
 
                             <button onClick={this.savecompany} className="btn btn-success">
                                 Submit

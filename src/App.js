@@ -9,6 +9,7 @@ import StockExchange from "./components/StockExchange";
 import AddCompany from "./components/addcompany";
 import StockExchangeMap from "./components/stockexchangemap";
 import Company from "./components/company";
+import ManageSector from "./components/ManageSector";
 
 class App extends Component {
   render() {
@@ -45,6 +46,11 @@ class App extends Component {
               </Link>
             </li>
             <li className="nav-item">
+              <Link to={"/addsector"} className="nav-link">
+                Manage Sector
+              </Link>
+            </li>
+            <li className="nav-item">
               <Link to={"/sign-in"} className="nav-link">
                 Logout
               </Link>
@@ -59,6 +65,7 @@ class App extends Component {
             <Route exact path="/stockexchange" component={StockExchange} />
             <Route exact path="/ipodetail" component={AddIPODetail} />
             <Route exact path="/mapcompany" component={StockExchangeMap} />
+            <Route exact path="/addsector" component={ManageSector} />
             <Route path="/company/:id" component={Company} />
           </Switch>
         </div>

@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-
-import ReactDOM from 'react-dom';
 import FusionCharts from 'fusioncharts';
 import Charts from 'fusioncharts/fusioncharts.charts';
 import ReactFC from 'react-fusioncharts';
@@ -21,14 +18,14 @@ let chartConfigs = {
     dataFormat: 'json', // Data type
     dataSource: {
         // Chart Configuration
-        "chart": {
+        chart: {
             "caption": "Stock Price",
             "xAxisName": "Company",
             "yAxisName": "Share Price",
             "theme": "fusion",
         },
         // Chart Data
-        "data": []
+        data: []
     },
 };
 

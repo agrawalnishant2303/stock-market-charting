@@ -12,6 +12,7 @@ export default class Company extends Component {
         this.onChangesectorName = this.onChangesectorName.bind(this);
         this.getCompany = this.getCompany.bind(this);
         this.updateCompany = this.updateCompany.bind(this);
+        this.deleteCompany = this.deleteCompany.bind(this);
 
         this.state = {
             currentCompany: {
@@ -218,7 +219,7 @@ export default class Company extends Component {
     
                 <button
                   className="badge badge-danger mr-2"
-                  onClick={this.deleteCompany.bind(this)}
+                  onClick={this.deleteCompany}
                 >
                   Delete
                 </button>

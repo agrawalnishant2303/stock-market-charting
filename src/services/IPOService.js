@@ -5,7 +5,8 @@ const ipodetail = "http://localhost:8080/getipodetails";
 const stockexchange = "http://localhost:8080/getstockexchange";
 const company = "http://localhost:8080/getallcompany";
 const exchangemap = "http://localhost:8080/listallmap";
-const upcomingipo = "http://localhost:8080/getupcomingipodetails"
+const upcomingipo = "http://localhost:8080/getupcomingipodetails";
+const sector = "http://localhost:8080/getallsector";
 
 class IPOService{
     getUpcomingIPOs(){
@@ -33,6 +34,9 @@ class IPOService{
     }
     deleteCompany(id) {
         return http.delete(`/company/${id}`);
+    }
+    getAllSector(){
+        return axios.get(sector)
     }
 
 }
