@@ -14,7 +14,7 @@
 	<name>stock-market-charting</name>
 	<description>Stock Market Charting</description>
 	<properties>
-		<java.version>16</java.version>
+		<java.version>1.8</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
