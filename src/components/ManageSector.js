@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import IPOService from "../services/IPOService";
-import Table from "react-bootstrap/table"
+import Table from "react-bootstrap/Table"
 export default class ManageSector extends Component {
     constructor(props) {
         super(props);
