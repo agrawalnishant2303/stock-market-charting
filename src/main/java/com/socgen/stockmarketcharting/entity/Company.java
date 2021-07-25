@@ -47,13 +47,13 @@ public class Company {
 	@Column(nullable=false)
 	@Type(type="text")
 	private String briefWriteup;
-	@OneToOne(fetch = FetchType.LAZY, mappedBy="company", cascade=CascadeType.REMOVE)
+	@OneToOne(fetch = FetchType.LAZY, mappedBy="company", cascade=CascadeType.ALL)
 	@JsonIgnore
 	private IpoDetail ipo;
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JsonIgnore
 	private Sector sector;
-	@OneToMany(targetEntity = CompanyStockExchangeMap.class, cascade=CascadeType.REMOVE)
+	@OneToMany(targetEntity = CompanyStockExchangeMap.class, cascade=CascadeType.ALL)
 	@JsonIgnore
 	private List<CompanyStockExchangeMap> compStockmap = new ArrayList<>();
 	protected Company() {

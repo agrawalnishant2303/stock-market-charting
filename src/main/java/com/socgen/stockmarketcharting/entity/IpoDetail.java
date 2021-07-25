@@ -39,7 +39,7 @@ public class IpoDetail {
 	@Column(nullable=false)
 	private String remarks;
 	private String companyName;
-	@OneToOne(fetch=FetchType.LAZY, cascade = CascadeType.REMOVE)
+	@OneToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
 	@JsonIgnore
 	private Company company;
 	@ManyToMany
