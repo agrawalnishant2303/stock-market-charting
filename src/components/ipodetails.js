@@ -14,6 +14,7 @@ export default class AddIPODetail extends Component {
         this.onChangeremarks = this.onChangeremarks.bind(this);
         this.saveipodetail = this.saveipodetail.bind(this);
         this.newipo = this.newipo.bind(this);
+        this.onChangeCompanyDropdown = this.onChangeCompanyDropdown.bind(this);
         this.state = {
             companyName: "",
             pricePerShare: 0,
@@ -21,6 +22,8 @@ export default class AddIPODetail extends Component {
             openDateTime: "",
             remarks: "",
             submitted: false,
+            selectedCompany:"",
+            Companies:[],
             ipolist: []
         };
     }
@@ -28,6 +31,12 @@ export default class AddIPODetail extends Component {
         IPOService.getAll().then((response => {
             this.setState({ ipolist: response.data })
         }));
+        IPOService.getAllCompany().then((response => {
+            console.log(response.data);
+            this.setState({
+                Companies: response.data
+            })}
+         ));
     }
 
     onChangecompanyName(e) {
@@ -76,15 +85,15 @@ export default class AddIPODetail extends Component {
             body: JSON.stringify(data)
         };
         fetch('http://localhost:8080/ipodetails', requestOptions)
-        .then(response => {
-            this.setState({
-                submitted:true
+            .then(response => {
+                this.setState({
+                    submitted: true
+                });
+                console.log(response.data);
+            })
+            .catch(e => {
+                console.log(e);
             });
-            console.log(response.data);
-        })
-        .catch(e=> {
-            console.log(e);
-        });
     }
 
     newipo() {
@@ -95,6 +104,13 @@ export default class AddIPODetail extends Component {
             openDateTime: "",
             remarks: "",
             submitted: false
+        });
+    }
+    onChangeCompanyDropdown(e) {
+        this.setState({
+            selectedCompany: e.target.value,
+            companyName: e.target.value,
+            //validationError:e.target.value === ""?"You Must select a sector ":""});
         });
     }
 
@@ -111,18 +127,12 @@ export default class AddIPODetail extends Component {
                         </div>
                     ) : (
                         <div>
-                            <div className="form-group">
-                                <label htmlFor="title">Company Name</label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    id="companyName"
-                                    required
-                                    value={this.state.companyName}
-                                    onChange={this.onChangecompanyName}
-                                    name="companyName"
-                                />
-                            </div>
+                            Select Company
+                            <select
+                                onClick={this.onChangeCompanyDropdown}>
+                                {this.state.Companies.map((Company) => <option key={Company.id} value={Company.companyName}> {Company.companyName} </option>)}
+                                value={this.state.selectedCompany}
+                            </select>
 
                             <div className="form-group">
                                 <label htmlFor="title">Price Per Share</label>
@@ -180,33 +190,33 @@ export default class AddIPODetail extends Component {
                     )}
                 </div>
                 <div>
-                <h1 className="text-center"> IPO Details</h1>
-                <Table className="table table-striped">
-                    <thead>
-                        <tr>
-                            <td>IPO-ID</td>
-                            <td>Company Name</td>
-                            <td>Open Date Time</td>
-                            <td>Price Per Share</td>
-                            <td>Total Number Of Shares</td>
-                        </tr>
-                    </thead>
+                    <h1 className="text-center"> IPO Details</h1>
+                    <Table className="table table-striped">
+                        <thead>
+                            <tr>
+                                <td>IPO-ID</td>
+                                <td>Company Name</td>
+                                <td>Open Date Time</td>
+                                <td>Price Per Share</td>
+                                <td>Total Number Of Shares</td>
+                            </tr>
+                        </thead>
 
-                    <tbody>
-                        {
-                            this.state.ipolist.map(
-                                ipolist =>
-                                    <tr key={ipolist.id}>
-                                        <td>{ipolist.id}</td>
-                                        <td>{ipolist.companyName}</td>
-                                        <td>{ipolist.openDateTime}</td>
-                                        <td>{ipolist.pricePerShare}</td>
-                                        <td>{ipolist.totalnumberOfShares}</td>
-                                    </tr>
-                            )
-                        }
-                    </tbody>
-                </Table>
+                        <tbody>
+                            {
+                                this.state.ipolist.map(
+                                    ipolist =>
+                                        <tr key={ipolist.id}>
+                                            <td>{ipolist.id}</td>
+                                            <td>{ipolist.companyName}</td>
+                                            <td>{ipolist.openDateTime}</td>
+                                            <td>{ipolist.pricePerShare}</td>
+                                            <td>{ipolist.totalnumberOfShares}</td>
+                                        </tr>
+                                )
+                            }
+                        </tbody>
+                    </Table>
                 </div>
             </div>
 

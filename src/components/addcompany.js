@@ -13,6 +13,7 @@ export default class AddCompany extends Component {
         this.onChangesectorName = this.onChangesectorName.bind(this);
         this.savecompany = this.savecompany.bind(this);
         this.newcompany = this.newcompany.bind(this);
+        this.onChangeSectorDropdown = this.onChangeSectorDropdown.bind(this);
         this.state = {
             companyName: "",
             turnover: 0,
@@ -208,13 +209,13 @@ export default class AddCompany extends Component {
                             <div>
                                 Select Sector
                                 <select
-                                value={this.state.selectedSector}
-                                onClick={this.onChangeSectorDropdown.bind(this)}>
+                                
+                                onClick={this.onChangeSectorDropdown}>
                                     {this.state.sectors.map((sector)=>
                                     <option key={sector.id}
                                     value={sector.sectorName}>{sector.sectorName}</option>
                                     )}
-
+                                value={this.state.selectedSector}
                                 </select>
                             </div>
                             <div style={{color:'red',marginTop:'5px'}}>

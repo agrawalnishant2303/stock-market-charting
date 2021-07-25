@@ -8,6 +8,7 @@ const exchangemap = "http://localhost:8080/listallmap";
 const upcomingipo = "http://localhost:8080/getupcomingipodetails";
 const sector = "http://localhost:8080/getallsector";
 
+
 class IPOService{
     getUpcomingIPOs(){
         return axios.get(upcomingipo);
@@ -38,6 +39,7 @@ class IPOService{
     getAllSector(){
         return axios.get(sector)
     }
+
 
 }
 

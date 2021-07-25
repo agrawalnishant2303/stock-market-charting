@@ -7,12 +7,16 @@ import reportWebVitals from './reportWebVitals';
 import LoginPage from './Login';
 import UserLanding from './UserLanding';
 import FusionChartsExample from './fusioncharts';
+import FusionChartsPractice from './fusionchartpractice';
+import CompareTwoCompany from './components/Comparetwocompany';
 ReactDOM.render(
   <BrowserRouter>
     <LoginPage />
     <UserLanding />
     <App />
     <FusionChartsExample />
+    <FusionChartsPractice />
+    <CompareTwoCompany />
   </BrowserRouter>,
   document.getElementById('root')
 );

@@ -9,12 +9,18 @@ export default class StockExchangeMap extends Component {
         super(props);
         this.savemap = this.savemap.bind(this);
         this.newmap = this.newmap.bind(this);
+        this.onChangeCompanyDropdown = this.onChangeCompanyDropdown.bind(this);
+        this.onChangeExchangeDropdown = this.onChangeExchangeDropdown.bind(this);
         this.state = {
             companyName: "",
             companycode: "",
             name: "",
             submitted:false,
             exchangeMap:[],
+            selectedCompany:"",
+            selectedExchange:"",
+            Companies:[],
+            stockexchanges:[]
         };
     }
     componentDidMount()
@@ -22,6 +28,18 @@ export default class StockExchangeMap extends Component {
         IPOService.getExchangeMap().then((response => {
             this.setState({exchangeMap:response.data})
         }));
+        IPOService.getAllCompany().then((response => {
+            console.log(response.data);
+            this.setState({
+                Companies: response.data
+            })}
+         ));
+         IPOService.getAllStockExchange().then((response => {
+            console.log(response.data);
+            this.setState({
+                stockexchanges: response.data
+            })}
+         ));
        }
     changecompanyName(e){
         this.setState({companyName:e.target.value});
@@ -34,6 +52,20 @@ export default class StockExchangeMap extends Component {
     changename(e){
         this.setState({
             name:e.target.value
+        });
+    }
+    onChangeCompanyDropdown(e) {
+        this.setState({
+            selectedCompany: e.target.value,
+            companyName: e.target.value,
+            //validationError:e.target.value === ""?"You Must select a sector ":""});
+        });
+    }
+    onChangeExchangeDropdown(e) {
+        this.setState({
+            selectedExchange: e.target.value,
+            name: e.target.value,
+            //validationError:e.target.value === ""?"You Must select a sector ":""});
         });
     }
     
@@ -90,15 +122,11 @@ export default class StockExchangeMap extends Component {
                             <div>
                              <div className="form-group">
                                  <label htmlFor="title">Company Name</label>
-                                 <input
-                                    type="text"
-                                     className="form-control"
-                                     id="companyName"
-                                     required
-                                     value={this.state.companyName}
-                                     onChange={this.changecompanyName.bind(this)}
-                                    name="companyName"
-                                 />
+                                 <select
+                                onClick={this.onChangeCompanyDropdown}>
+                                {this.state.Companies.map((Company) => <option key={Company.id} value={Company.companyName}> {Company.companyName} </option>)}
+                                value={this.state.selectedCompany}
+                            </select>
                              </div>
 
                             <div className="form-group">
@@ -115,15 +143,11 @@ export default class StockExchangeMap extends Component {
                             </div>
                             <div className="form-group">
                                 <label htmlFor="title">Stock Exchange Name</label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    id="name"
-                                    required
-                                    value={this.state.name}
-                                    onChange={this.changename.bind(this)}
-                                    name="name"
-                                />
+                                <select
+                                onClick={this.onChangeExchangeDropdown}>
+                                {this.state.stockexchanges.map((stockexchange) => <option key={stockexchange.id} value={stockexchange.name}> {stockexchange.name} </option>)}
+                                value={this.state.selectedExchange}
+                            </select>
                             </div>
                             
 

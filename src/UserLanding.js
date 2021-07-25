@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Switch, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import CompareCompany from "./components/CompareCompany";
+import CompareTwoCompany from "./components/Comparetwocompany";
 import CompareSector from "./components/CompareSector";
 import UpcomingIPO from "./components/UpcomingIPO";
 
@@ -42,7 +42,7 @@ class App extends Component {
         <div className="container mt-3">
           <Switch>
             <Route exact path="/upcomingipo" component={UpcomingIPO} />
-            <Route exact path="/comparecompany" component={CompareCompany} />
+            <Route exact path="/comparecompany" component={CompareTwoCompany} />
             <Route exact path="/comparesector" component={CompareSector} />
           </Switch>
         </div>

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+
 import './App.css';
+import ReactDOM from 'react-dom';
 import FusionCharts from 'fusioncharts';
 import Charts from 'fusioncharts/fusioncharts.charts';
 import ReactFC from 'react-fusioncharts';
@@ -18,33 +20,33 @@ let chartConfigs = {
     dataFormat: 'json', // Data type
     dataSource: {
         // Chart Configuration
-        chart: {
+        "chart": {
             "caption": "Stock Price",
-            "xAxisName": "Company",
+            "xAxisName": "Date",
             "yAxisName": "Share Price",
             "theme": "fusion",
         },
         // Chart Data
-        data:[]
+        "data": []
     },
 };
 
-
-class FusionChartsExample extends Component {
+class FusionChartsPractice extends Component {
 
     constructor(props) {
-        
+
         super(props);
-        this.state=chartConfigs;
         this.state = {
             companyName: "",
             name: "",
             from1: "",
             to1: "",
         };
+        this.state = chartConfigs;
+
+        this.dosearch = this.dosearch.bind(this);
 
     }
-
     onChangecompanyName(e) {
         this.setState({
             companyName: e.target.value
@@ -66,6 +68,8 @@ class FusionChartsExample extends Component {
             to1: e.target.value
         });
     }
+
+
     dosearch() {
         var data2send = {
             name: this.state.name,
@@ -74,18 +78,19 @@ class FusionChartsExample extends Component {
             to1: this.state.to1
         }
         const myInit1 = {
-            method: 'GET',
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*',
                 'Vary': 'Origin'
             },
+            body: JSON.stringify(data2send)
 
         };
         //let searchval = this.refs.searchInput.value;//get node value or text value
         //console.log(searchval);
         let data = [];
-        let endpoint = 'http://localhost:8080/getallstockprice';
+        let endpoint = 'http://127.0.0.1:8080/getonecompany';
         //you need to give end slash ony if you call from rest endpint
         fetch(endpoint, myInit1)
 
@@ -136,8 +141,7 @@ class FusionChartsExample extends Component {
 
 
                 <div className="input-group">
-
-                    <div className="form-group">
+                <div className="form-group">
                         <label htmlFor="title">Company Name</label>
                         <input
                             type="text"
@@ -185,7 +189,8 @@ class FusionChartsExample extends Component {
                                     name="to1"
                                 />
                             </div>
-                    <button className="btn btn-default" type="button" onClick={this.dosearch.bind(this)} > Go</button>
+                    
+                    <button className="btn btn-default" type="button" onClick={this.dosearch} > Go</button>
 
                     {chartConfigs.Chart}</div>
 
@@ -199,4 +204,4 @@ class FusionChartsExample extends Component {
     }
 }
 
-export default FusionChartsExample;
+export default FusionChartsPractice;
