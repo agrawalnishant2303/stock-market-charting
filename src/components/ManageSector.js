@@ -49,7 +49,7 @@ export default class ManageSector extends Component {
             },
             body: JSON.stringify(data)
         };
-        fetch('http://localhost:8080/sector', requestOptions)
+        fetch('https://stockmarketcharting.herokuapp.com/sector', requestOptions)
             .then(response => {
                 this.setState({
                     submitted:true

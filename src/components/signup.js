@@ -49,7 +49,7 @@ export default class SignUp extends Component {
             },
             body: JSON.stringify(data)
         };
-        fetch('http://localhost:8080/setuserapi', requestOptions)
+        fetch('https://stockmarketcharting.herokuapp.com/setuserapi', requestOptions)
             .then(response => {
                 this.setState({
                     submitted: true

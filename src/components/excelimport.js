@@ -69,7 +69,7 @@ export default class excelimport extends Component {
 
           body: data2
         };
-        fetch('http://localhost:8080/stockprice',requestOptions)
+        fetch('https://stockmarketcharting.herokuapp.com/stockprice',requestOptions)
           .then(response => response.json)
       }
         

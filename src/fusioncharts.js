@@ -85,7 +85,7 @@ class FusionChartsExample extends Component {
         //let searchval = this.refs.searchInput.value;//get node value or text value
         //console.log(searchval);
         let data = [];
-        let endpoint = 'http://localhost:8080/getallstockprice';
+        let endpoint = 'https://stockmarketcharting.herokuapp.com/getallstockprice';
         //you need to give end slash ony if you call from rest endpint
         fetch(endpoint, myInit1)
 
