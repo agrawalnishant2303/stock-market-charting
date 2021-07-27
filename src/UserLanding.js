@@ -2,12 +2,13 @@ import React, { Component } from "react";
 import { Switch, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import CompareTwoCompany from "./components/Comparetwocompany";
+import CompareCompany from "./components/CompareCompany";
+import Compare2Companies from "./components/Comparetwocompany";
 import CompareSector from "./components/CompareSector";
 import UpcomingIPO from "./components/UpcomingIPO";
 
 
-class App extends Component {
+class UserLandingPage extends Component {
   render() {
     return (
       <div>
@@ -27,6 +28,11 @@ class App extends Component {
               </Link>
             </li>
             <li className="nav-item">
+              <Link to={"/compare2companies"} className="nav-link">
+                Compare 2 Companies
+              </Link>
+            </li>
+            <li className="nav-item">
               <Link to={"/comparesector"} className="nav-link">
                 Compare Sector
               </Link>
@@ -42,7 +48,8 @@ class App extends Component {
         <div className="container mt-3">
           <Switch>
             <Route exact path="/upcomingipo" component={UpcomingIPO} />
-            <Route exact path="/comparecompany" component={CompareTwoCompany} />
+            <Route exact path="/comparecompany" component={CompareCompany} />
+            <Route exact path ="/compare2companies" component={Compare2Companies}/>
             <Route exact path="/comparesector" component={CompareSector} />
           </Switch>
         </div>
@@ -51,4 +58,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default UserLandingPage;

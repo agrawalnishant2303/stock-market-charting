@@ -84,7 +84,8 @@ export default class AddIPODetail extends Component {
             },
             body: JSON.stringify(data)
         };
-        fetch('https://stockmarketcharting.herokuapp.com/ipodetails', requestOptions)
+        //fetch('https://stockmarketcharting.herokuapp.com/ipodetails', requestOptions)
+        fetch('https://stockmarketcharting-react.herokuapp.com/ipodetails', requestOptions)
             .then(response => {
                 this.setState({
                     submitted: true

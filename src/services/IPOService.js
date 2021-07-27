@@ -1,12 +1,18 @@
 import axios from 'axios';
 
 import http from "../http-common";
-const ipodetail = "https://stockmarketcharting.herokuapp.com/getipodetails";
-const stockexchange = "https://stockmarketcharting.herokuapp.com/getstockexchange";
-const company = "https://stockmarketcharting.herokuapp.com/getallcompany";
-const exchangemap = "https://stockmarketcharting.herokuapp.com/listallmap";
-const upcomingipo = "https://stockmarketcharting.herokuapp.com/getupcomingipodetails";
-const sector = "https://stockmarketcharting.herokuapp.com/getallsector";
+const ipodetail = "https://stockmarketcharting-react.herokuapp.com/getipodetails";
+const stockexchange = "https://stockmarketcharting-react.herokuapp.com/getstockexchange";
+const company = "https://stockmarketcharting-react.herokuapp.com/getallcompany";
+const exchangemap = "https://stockmarketcharting-react.herokuapp.com/listallmap";
+const upcomingipo = "https://stockmarketcharting-react.herokuapp.com/getupcomingipodetails";
+const sector = "https://stockmarketcharting-react.herokuapp.com/getallsector";
+// const ipodetail = "http://localhost:8080/getipodetails";
+// const stockexchange = "http://localhost:8080/getstockexchange";
+// const company = "http://localhost:8080/getallcompany";
+// const exchangemap = "http://localhost:8080/listallmap";
+// const upcomingipo = "http://localhost:8080/getupcomingipodetails";
+// const sector = "http://localhost:8080/getallsector";
 
 
 class IPOService{

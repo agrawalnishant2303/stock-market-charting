@@ -2,9 +2,10 @@ import React from 'react';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-
+import App from "./App";
 import Login from "./components/login";
 import SignUp from "./components/signup";
+import UserLandingPage from './UserLanding';
 
 function LoginPage() {
   return (<Router>
@@ -31,6 +32,8 @@ function LoginPage() {
             <Route exact path='/' component={Login} />
             <Route path="/sign-in" component={Login} />
             <Route path="/sign-up" component={SignUp} />
+            <Route path="/LandingPage" component={App} />
+            <Route path="/UserLandingPage" component={UserLandingPage} />
           </Switch>
         </div>
       </div>

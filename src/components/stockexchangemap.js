@@ -86,7 +86,8 @@ export default class StockExchangeMap extends Component {
             },
             body: JSON.stringify(data)
         };
-        fetch('https://stockmarketcharting.herokuapp.com/mapcompanycode', requestOptions)
+        //fetch('https://stockmarketcharting.herokuapp.com/mapcompanycode', requestOptions)
+        fetch('https://stockmarketcharting-react.herokuapp.com/mapcompanycode', requestOptions)
         .then(response => {
             this.setState({
                 submitted:true

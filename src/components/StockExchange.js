@@ -41,7 +41,8 @@ export default class StockExchange extends Component {
             },
             body: JSON.stringify(data)
         };
-        fetch('https://stockmarketcharting.herokuapp.com/stockexchange', requestOptions)
+        //fetch('https://stockmarketcharting.herokuapp.com/stockexchange', requestOptions)
+        fetch("https://stockmarketcharting-react.herokuapp.com/stockexchange",requestOptions)
             .then(response => {
                 this.setState({
                     submitted:true

@@ -97,7 +97,8 @@ export default class AddCompany extends Component {
             },
             body: JSON.stringify(data)
         };
-        fetch('https://stockmarketcharting.herokuapp.com/company', requestOptions)
+        // fetch('https://stockmarketcharting.herokuapp.com/company', requestOptions)
+        fetch('https://stockmarketcharting-react.herokuapp.com/company', requestOptions)
             .then(response => {
                 this.setState({
                     submitted: true

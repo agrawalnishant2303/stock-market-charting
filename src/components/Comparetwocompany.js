@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom';
 import FusionCharts from 'fusioncharts';
 import Charts from 'fusioncharts/fusioncharts.charts';
 import ReactFC from 'react-fusioncharts';
+import ReactFusioncharts from 'react-fusioncharts';
 import FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
 
 
@@ -14,83 +15,51 @@ ReactFC.fcRoot(FusionCharts, Charts, FusionTheme);
 
 
 let chartConfigs = {
-    type: 'column2d',// The chart type
+    type: 'mscolumn2d',// The chart type
     width: '700', // Width of the chart
     height: '400', // Height of the chart
     dataFormat: 'json', // Data type
     dataSource: {
-        // Chart Configuration
-        "chart": {
-            "caption": "Stock Price",
-            "xAxisName": "Date",
-            "yAxisName": "Share Price",
-            "theme": "fusion",
-        },
-        // Chart Data
-        "categories": [
-            {
-                "category": [
-                    {
-                        "label": "Q1"
-                    },
-                    {
-                        "label": "Q2"
-                    },
-                    {
-                        "label": "Q3"
-                    },
-                    {
-                        "label": "Q4"
-                    }
-                ]
-            }
-        ],
-        "dataset": [
-            {
-                "seriesname": "Previous Year",
-                "data": [
-                    {
-                        "value": "10000"
-                    },
-                    {
-                        "value": "11500"
-                    },
-                    {
-                        "value": "12500"
-                    },
-                    {
-                        "value": "15000"
-                    }
-                ]
+            "chart": {
+                "caption": "Comparison of 2 Companies on Share Prices",
+                "xAxisname": "Date",
+                "yAxisName": "Share Price",
+                "numberPrefix": "Rs.",
+                "plotFillAlpha": "80",
+                "theme": "fusion"
             },
-            {
-                "seriesname": "Current Year",
-                "data": [
-                    {
-                        "value": "25400"
-                    },
-                    {
-                        "value": "29800"
-                    },
-                    {
-                        "value": "21800"
-                    },
-                    {
-                        "value": "26800"
-                    }
-                ]
-            }
-        ],
+            "categories": [
+                {
+                    "category": [
+                        
+                    ]
+                }
+            ],
+            "dataset": [
+                {
+                    "seriesname": "Previous year",
+                    "data": [
+                        
+                    ]
+                },
+                {
+                    "seriesname": "Current Year",
+                    "data": [
+                        
+                    ]
+                }
+            ],
     },
 };
 
-class CompareTwoCompany extends Component {
+class Compare2Companies extends Component {
 
     constructor(props) {
 
         super(props);
         this.state = {
             companyName: "",
+            companyName2:"",
             name: "",
             from1: "",
             to1: "",
@@ -105,12 +74,18 @@ class CompareTwoCompany extends Component {
             companyName: e.target.value
         });
     }
+    onChangecompanyName2(e) {
+        this.setState({
+            companyName2: e.target.value
+        });
+    }
 
     onChangename(e) {
         this.setState({
             name: e.target.value
         });
     }
+
     onChangefrom1(e) {
         this.setState({
             from1: e.target.value
@@ -126,9 +101,18 @@ class CompareTwoCompany extends Component {
     dosearch() {
         var data2send = {
             name: this.state.name,
-            companyName: this.state.companyName,
+            companyName1: this.state.companyName,
+            companyName2: this.state.companyName2,
             from1: this.state.from1,
             to1: this.state.to1
+        }
+
+        var data2send2 = {
+            name: this.state.name,
+            companyName: this.state.companyName2,
+            from1: this.state.from1,
+            to1: this.state.to1
+
         }
         const myInit1 = {
             method: 'POST',
@@ -140,10 +124,22 @@ class CompareTwoCompany extends Component {
             body: JSON.stringify(data2send)
 
         };
+
+        // const myInit2 = {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //         'Access-Control-Allow-Origin': '*',
+        //         'Vary': 'Origin'
+        //     },
+        //     body: JSON.stringify(data2send2)
+
+        // };
         //let searchval = this.refs.searchInput.value;//get node value or text value
         //console.log(searchval);
         let data = [];
-        let endpoint = 'https://stockmarketcharting.herokuapp.com/getonecompany';
+        let endpoint = 'https://stockmarketcharting-react.herokuapp.com/getdifferentcompany';
+        //let endpoint = 'https://stockmarketcharting.herokuapp.com/getdifferentcompany';
         //you need to give end slash ony if you call from rest endpint
         fetch(endpoint, myInit1)
 
@@ -153,29 +149,75 @@ class CompareTwoCompany extends Component {
                 return response.json();
             })
             .then(response => {
-                console.log(response);//real print of array
+                console.log(response['firstList']);//real print of array
 
 
                 var prevDs = Object.assign({}, this.state.dataSource);
                 console.log(prevDs);
-                response.forEach((value, key) => {
+
+                // prevDs.dataset[0] = {
+                //     'seriesname':this.state.companyName
+                // }
+                response['firstList'].forEach((value, key) => {
                     //		data[key] = {
-                    prevDs.data[key] = {
+                    prevDs.categories[0].category[key] = {
 
-                        'label': response[key].datee,
-                        'value': response[key].shareprice
+                        'label': response['firstList'][key].datee,
+                       
                     };
+                    
+                    prevDs.dataset[0].data[key] = {
+                        'value':response['firstList'][key].shareprice
+                    }
+                    
+                //prevDs.dataset[0]
+                   
+
+                  
 
 
-                    this.setState({
-                        dataSource: prevDs,
-                    });
+                    // this.setState({
+                    //     dataSource: prevDs,
+                    // });
 
                     console.log('data' + JSON.stringify(data));
 
 
 
                 });
+                response['secondList'].forEach((value, key) => {
+                    //		data[key] = {
+                    
+                    
+                    prevDs.dataset[1].data[key] = {
+                        'value':response['secondList'][key].shareprice
+                    }
+                    
+                //prevDs.dataset[0]
+                   
+
+                  
+
+
+                    // this.setState({
+                    //     dataSource: prevDs,
+                    // });
+
+                    console.log('data' + JSON.stringify(data));
+
+
+
+                });
+
+                
+                prevDs.dataset[0].seriesname = this.state.companyName
+                prevDs.dataset[1].seriesname = this.state.companyName2
+                console.log(prevDs);
+                this.setState({
+                    dataSource: prevDs
+                })
+               // console.log(dataSource);
+                
                 console.log('this.' + data);
                 console.log('chart' + JSON.stringify(chartConfigs));
 
@@ -204,6 +246,19 @@ class CompareTwoCompany extends Component {
                             value={this.state.companyName}
                             onChange={this.onChangecompanyName.bind(this)}
                             name="companyName"
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="title">Company Name</label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            id="companyName2"
+                            required
+                            value={this.state.companyName2}
+                            onChange={this.onChangecompanyName2.bind(this)}
+                            name="companyName2"
                         />
                     </div>
                     <div className="form-group">
@@ -249,7 +304,7 @@ class CompareTwoCompany extends Component {
 
 
 
-                <ReactFC {...chartConfigs} />;
+                <ReactFusioncharts {...chartConfigs} />;
 
 
             </div>
@@ -257,4 +312,4 @@ class CompareTwoCompany extends Component {
     }
 }
 
-export default CompareTwoCompany;
+export default Compare2Companies;
